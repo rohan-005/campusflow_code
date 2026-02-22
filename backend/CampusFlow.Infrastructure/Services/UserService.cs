@@ -58,27 +58,13 @@ public class UserService : IUserService
         var email = dto.Email?.Trim().ToLower();
         var password = dto.Password?.Trim();
 
-        Console.WriteLine("Login email: " + email);
-
-        var allUsers = await _context.Users.ToListAsync();
-        Console.WriteLine("Users count in DB: " + allUsers.Count);
-
-        foreach (var u in allUsers)
-        {
-            Console.WriteLine("DB Email: " + u.Email);
-        }
-
         var user = await _context.Users
             .FirstOrDefaultAsync(x => x.Email.ToLower() == email);
 
         if (user == null)
             throw new UnauthorizedAccessException("Invalid credentials");
 
-        Console.WriteLine("Found user: " + user.Email);
-
         var passwordValid = BCrypt.Net.BCrypt.Verify(password, user.PasswordHash);
-
-        Console.WriteLine("Password verify result: " + passwordValid);
 
         if (!passwordValid)
             throw new UnauthorizedAccessException("Invalid credentials");

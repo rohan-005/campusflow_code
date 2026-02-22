@@ -9,4 +9,26 @@ public class CampusFlowDbContext : DbContext
         : base(options) { }
 
     public DbSet<User> Users { get; set; }
+    public DbSet<Resource> Resources { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Entity<Resource>()
+            .HasOne<User>()
+            .WithMany()
+            .HasForeignKey(r => r.UploadedBy)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<Resource>()
+            .HasOne<User>()
+            .WithMany()
+            .HasForeignKey(r => r.ApprovedBy)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<Resource>()
+            .Property(r => r.Status)
+            .HasConversion<string>();
+    }
 }

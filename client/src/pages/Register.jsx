@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { registerUser } from "../api/authApi";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import "../styles/auth.css";
 
 const Register = () => {
   const [form, setForm] = useState({
@@ -23,60 +24,84 @@ const Register = () => {
     e.preventDefault();
     setLoading(true);
     setError(null);
-    
+
     try {
       await registerUser(form);
       navigate("/login");
     } catch (err) {
-      const errorMessage = err.response?.data?.message || "Registration failed. Please check your information and try again.";
+      const errorMessage =
+        err.response?.data?.message ||
+        "Registration failed. Try again.";
       setError(errorMessage);
-      console.error("Registration error:", err.response?.data || err.message);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div>
-      <h2>Register</h2>
+    <div className="auth-wrapper">
+      <div className="auth-card">
+        <h2 className="auth-title">Create Account</h2>
+        <p className="auth-subtitle">Join CampusFlow</p>
 
-      {error && <div style={{ color: "red", marginBottom: "10px" }}>{error}</div>}
+        {error && <div className="auth-error">{error}</div>}
 
-      <form onSubmit={handleSubmit}>
-        <input
-          name="name"
-          placeholder="Name"
-          value={form.name}
-          onChange={handleChange}
-          disabled={loading}
-        />
-        <input
-          name="studentId"
-          placeholder="Student ID"
-          value={form.studentId}
-          onChange={handleChange}
-          disabled={loading}
-        />
-        <input
-          name="email"
-          placeholder="Email"
-          value={form.email}
-          onChange={handleChange}
-          disabled={loading}
-        />
-        <input
-          name="password"
-          type="password"
-          placeholder="Password"
-          value={form.password}
-          onChange={handleChange}
-          disabled={loading}
-        />
+        <form onSubmit={handleSubmit}>
+          <div className="input-group">
+            <input
+              name="name"
+              placeholder="Full Name"
+              value={form.name}
+              onChange={handleChange}
+              disabled={loading}
+              required
+            />
+          </div>
 
-        <button type="submit" disabled={loading}>
-          {loading ? "Registering..." : "Register"}
-        </button>
-      </form>
+          <div className="input-group">
+            <input
+              name="studentId"
+              placeholder="Student ID"
+              value={form.studentId}
+              onChange={handleChange}
+              disabled={loading}
+              required
+            />
+          </div>
+
+          <div className="input-group">
+            <input
+              name="email"
+              type="email"
+              placeholder="Email"
+              value={form.email}
+              onChange={handleChange}
+              disabled={loading}
+              required
+            />
+          </div>
+
+          <div className="input-group">
+            <input
+              name="password"
+              type="password"
+              placeholder="Password"
+              value={form.password}
+              onChange={handleChange}
+              disabled={loading}
+              required
+            />
+          </div>
+
+          <button className="auth-btn" type="submit" disabled={loading}>
+            {loading ? "Registering..." : "Register"}
+          </button>
+        </form>
+
+        <p className="auth-footer">
+          Already have an account? <Link to="/login">Login</Link>
+        </p>
+      </div>
     </div>
   );
 };
