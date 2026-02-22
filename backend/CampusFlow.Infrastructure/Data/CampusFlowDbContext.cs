@@ -11,6 +11,9 @@ public class CampusFlowDbContext : DbContext
     public DbSet<User> Users { get; set; }
     public DbSet<Resource> Resources { get; set; }
 
+    public DbSet<Asset> Assets { get; set; }
+    public DbSet<AssetRequest> AssetRequests { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
