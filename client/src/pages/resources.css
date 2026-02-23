@@ -1,0 +1,151 @@
+.page-container {
+  max-width: 900px;
+  margin: auto;
+  padding: 30px;
+}
+
+.page-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 25px;
+}
+
+/* CARD */
+.card {
+  background: var(--bg-white);
+  padding: 20px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 20px;
+  border: 1px solid var(--border-light);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+/* FORM */
+.card-form {
+  background: var(--bg-white);
+  padding: 30px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.input,
+.textarea,
+.file-input {
+  padding: 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-light);
+  font-size: 0.95rem;
+}
+
+.textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* BUTTONS */
+.btn-primary {
+  background: var(--primary-blue);
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-primary:hover {
+  background: var(--primary-blue-dark);
+}
+
+.btn-success {
+  background: var(--emerald);
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-success:hover {
+  background: var(--emerald-dark);
+}
+
+.btn-danger {
+  background: var(--red-dark);
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-danger:hover {
+  opacity: 0.85;
+}
+
+/* BADGES */
+.badge {
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.badge.approved {
+  background: var(--status-approved);
+  color: var(--status-approved-text);
+}
+
+.badge.pending {
+  background: var(--status-pending);
+  color: var(--status-pending-text);
+}
+
+.badge.rejected {
+  background: var(--status-rejected);
+  color: var(--status-rejected-text);
+}
+
+/* LINKS */
+.link {
+  display: inline-block;
+  margin-top: 10px;
+  color: var(--primary-blue);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+/* UTILITIES */
+.button-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.success-message {
+  color: var(--emerald-dark);
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.empty-text {
+  color: var(--text-secondary);
+}

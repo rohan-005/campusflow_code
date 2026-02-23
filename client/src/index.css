@@ -1,4 +1,64 @@
 /* ========================= */
+/* CAMPUSFLOW DESIGN SYSTEM  */
+/* Color Palette & Global Styles */
+/* ========================= */
+
+:root {
+  /* Primary Colors */
+  --primary-blue: #059669;
+  --primary-blue-dark: #047857;
+  --primary-blue-light: #6ee7b7;
+
+  /* Success Colors */
+  --emerald: #10b981;
+  --emerald-dark: #059669;
+  --emerald-light: #6ee7b7;
+
+  /* Status Colors */
+  --status-approved: #d1fae5;
+  --status-approved-text: #065f46;
+  --status-pending: #fef3c7;
+  --status-pending-text: #92400e;
+  --status-rejected: #fee2e2;
+  --status-rejected-text: #7f1d1d;
+  --status-info: #d1fae5;
+  --status-info-text: #065f46;
+
+  /* Neutral Colors */
+  --bg-light: #ffffff;
+  --bg-white: #ffffff;
+  --border-light: #e2e8f0;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --text-tertiary: #94a3b8;
+
+  /* Additional Colors */
+  --red-soft: #fecaca;
+  --red-dark: #dc2626;
+  --amber-soft: #fcd34d;
+  --green-soft: #d1fae5;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+
+  /* Border Radius */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.25s ease;
+  --transition-slow: 0.35s ease;
+}
+
+/* ========================= */
 /* CLEAN GLOBAL RESET */
 /* ========================= */
 
@@ -18,17 +78,22 @@ body,
   width: 100%;
 }
 
-/* Prevent horizontal scroll */
+/* Core body styles */
 body {
   overflow-x: hidden;
-  font-family: "Inter", sans-serif;
-  background: linear-gradient(135deg, #29be73, #000000);
-  color: #1f2937;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--bg-light);
+  color: var(--text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Remove default button/input styles issues */
+/* Remove default button/input styles */
 button,
-input {
+input,
+textarea,
+select {
   font-family: inherit;
   outline: none;
 }
@@ -37,10 +102,491 @@ input {
 img {
   max-width: 100%;
   display: block;
+  height: auto;
 }
 
 /* Links clean */
 a {
   text-decoration: none;
   color: inherit;
+  transition: color var(--transition-fast);
+}
+
+/* ========================= */
+/* TYPOGRAPHY SCALE */
+/* ========================= */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Poppins", "Inter", sans-serif;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.5em;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+h4 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+h5 {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+h6 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+p {
+  color: var(--text-primary);
+  margin-bottom: 1em;
+}
+
+small {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+/* ========================= */
+/* BUTTONS - PRIMARY */
+/* ========================= */
+
+.btn,
+button {
+  border: none;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Primary Blue Button */
+.btn-primary,
+.btn-primary-blue {
+  background: var(--primary-blue);
+  color: var(--bg-white);
+  padding: 12px 24px;
+  box-shadow: var(--shadow-md);
+}
+
+.btn-primary:hover,
+.btn-primary-blue:hover {
+  background: var(--primary-blue-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-primary:active,
+.btn-primary-blue:active {
+  transform: translateY(0);
+}
+
+/* Success/Emerald Button */
+.btn-success,
+.btn-emerald {
+  background: var(--emerald);
+  color: var(--bg-white);
+  padding: 12px 24px;
+  box-shadow: var(--shadow-md);
+}
+
+.btn-success:hover,
+.btn-emerald:hover {
+  background: var(--emerald-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-success:active,
+.btn-emerald:active {
+  transform: translateY(0);
+}
+
+/* Secondary Button */
+.btn-secondary {
+  background: var(--bg-white);
+  color: var(--emerald);
+  border: 2px solid var(--emerald);
+  padding: 10px 22px;
+  font-weight: 600;
+}
+
+.btn-secondary:hover {
+  background: var(--status-approved);
+  transform: translateY(-2px);
+}
+
+.btn-secondary:active {
+  transform: translateY(0);
+}
+
+/* Danger Button */
+.btn-danger {
+  background: var(--red-dark);
+  color: var(--bg-white);
+  padding: 12px 24px;
+  box-shadow: var(--shadow-md);
+}
+
+.btn-danger:hover {
+  background: #b91c1c;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-danger:active {
+  transform: translateY(0);
+}
+
+/* Ghost/Outline Button */
+.btn-ghost {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-light);
+  padding: 10px 20px;
+}
+
+.btn-ghost:hover {
+  background: var(--bg-light);
+  border-color: var(--text-secondary);
+}
+
+/* Small Button */
+.btn-sm {
+  padding: 8px 16px;
+  font-size: 0.875rem;
+}
+
+/* Large Button */
+.btn-lg {
+  padding: 14px 32px;
+  font-size: 1rem;
+}
+
+/* Disabled State */
+.btn:disabled,
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* ========================= */
+/* FORM ELEMENTS */
+/* ========================= */
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="date"],
+textarea,
+select {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  background: var(--bg-white);
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+}
+
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+input[type="password"]::placeholder,
+input[type="number"]::placeholder,
+input[type="date"]::placeholder,
+textarea::placeholder {
+  color: var(--text-tertiary);
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--emerald);
+  background: var(--bg-white);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 120px;
+  font-family: inherit;
+}
+
+/* ========================= */
+/* CARDS & CONTAINERS */
+/* ========================= */
+
+.card {
+  background: var(--bg-white);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+  padding: 24px;
+  transition: all var(--transition-base);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--text-tertiary);
+}
+
+.card-header {
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.card-header h3 {
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.card-body {
+  color: var(--text-primary);
+}
+
+.card-footer {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-light);
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+/* ========================= */
+/* STATUS BADGES */
+/* ========================= */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.badge-approved {
+  background: var(--status-approved);
+  color: var(--status-approved-text);
+}
+
+.badge-pending {
+  background: var(--status-pending);
+  color: var(--status-pending-text);
+}
+
+.badge-rejected {
+  background: var(--status-rejected);
+  color: var(--status-rejected-text);
+}
+
+.badge-info {
+  background: var(--status-info);
+  color: var(--status-info-text);
+}
+
+/* ========================= */
+/* UTILITIES */
+/* ========================= */
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gap-2 {
+  gap: 8px;
+}
+
+.gap-4 {
+  gap: 16px;
+}
+
+.gap-6 {
+  gap: 24px;
+}
+
+.mt-2 {
+  margin-top: 8px;
+}
+
+.mt-4 {
+  margin-top: 16px;
+}
+
+.mt-6 {
+  margin-top: 24px;
+}
+
+.mb-2 {
+  margin-bottom: 8px;
+}
+
+.mb-4 {
+  margin-bottom: 16px;
+}
+
+.mb-6 {
+  margin-bottom: 24px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-primary {
+  color: var(--text-primary);
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+.text-emerald {
+  color: var(--emerald);
+}
+
+.text-blue {
+  color: var(--primary-blue);
+}
+
+/* ========================= */
+/* ANIMATIONS */
+/* ========================= */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.fade-in {
+  animation: fadeIn var(--transition-base);
+}
+
+.slide-in-left {
+  animation: slideInLeft var(--transition-base);
+}
+
+.slide-in-right {
+  animation: slideInRight var(--transition-base);
+}
+
+/* ========================= */
+/* RESPONSIVE */
+/* ========================= */
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.875rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+  }
+
+  .btn {
+    padding: 10px 18px;
+    font-size: 0.9rem;
+  }
 }

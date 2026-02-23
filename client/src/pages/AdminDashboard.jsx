@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { createAsset } from "../api/assetApi";
 import DashboardLayout from "../layout/DashboardLayout";
+import "../styles/admin.css";
 
 const AdminDashboard = () => {
   const [form, setForm] = useState({
@@ -10,10 +11,27 @@ const AdminDashboard = () => {
     totalQuantity: 1,
   });
 
-  const handleCreate = async (e) => {
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState("");
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    await createAsset(form);
-    alert("Asset Created");
+
+    if (!form.name || !form.category || !form.location) {
+      alert("Please fill all fields");
+      return;
+    }
+
+    setLoading(true);
+    setSuccess("");
+
+    await createAsset({
+      ...form,
+      totalQuantity: Number(form.totalQuantity),
+    });
+
+    setLoading(false);
+    setSuccess("Asset created successfully 🎉");
 
     setForm({
       name: "",
@@ -25,51 +43,60 @@ const AdminDashboard = () => {
 
   return (
     <DashboardLayout>
-      <h2 style={{ marginBottom: "20px" }}>Create Asset</h2>
+      <div className="admin-page">
+        <h2 className="admin-title">Create Asset</h2>
 
-      <form
-        onSubmit={handleCreate}
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "15px",
-          maxWidth: "400px",
-        }}
-      >
-        <input
-          placeholder="Name"
-          value={form.name}
-          onChange={(e) =>
-            setForm({ ...form, name: e.target.value })
-          }
-        />
+        <form className="admin-card" onSubmit={handleSubmit}>
+          <input
+            className="admin-input"
+            placeholder="Asset Name"
+            value={form.name}
+            onChange={(e) =>
+              setForm({ ...form, name: e.target.value })
+            }
+          />
 
-        <input
-          placeholder="Category"
-          value={form.category}
-          onChange={(e) =>
-            setForm({ ...form, category: e.target.value })
-          }
-        />
+          <input
+            className="admin-input"
+            placeholder="Description"
+            value={form.category}
+            onChange={(e) =>
+              setForm({ ...form, category: e.target.value })
+            }
+          />
 
-        <input
-          placeholder="Location"
-          value={form.location}
-          onChange={(e) =>
-            setForm({ ...form, location: e.target.value })
-          }
-        />
+          <input
+            className="admin-input"
+            placeholder="Location"
+            value={form.location}
+            onChange={(e) =>
+              setForm({ ...form, location: e.target.value })
+            }
+          />
 
-        <input
-          type="number"
-          value={form.totalQuantity}
-          onChange={(e) =>
-            setForm({ ...form, totalQuantity: e.target.value })
-          }
-        />
+          <input
+            className="admin-input"
+            type="number"
+            min="1"
+            value={form.totalQuantity}
+            onChange={(e) =>
+              setForm({ ...form, totalQuantity: e.target.value })
+            }
+          />
 
-        <button type="submit">Create</button>
-      </form>
+          <button
+            type="submit"
+            className="admin-btn-primary"
+            disabled={loading}
+          >
+            {loading ? "Creating..." : "Create Asset"}
+          </button>
+
+          {success && (
+            <p className="admin-success">{success}</p>
+          )}
+        </form>
+      </div>
     </DashboardLayout>
   );
 };

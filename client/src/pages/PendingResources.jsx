@@ -5,6 +5,7 @@ import {
   rejectResource,
 } from "../api/resourceApi";
 import DashboardLayout from "../layout/DashboardLayout";
+import "./resources.css";
 
 const PendingResources = () => {
   const [resources, setResources] = useState([]);
@@ -30,46 +31,44 @@ const PendingResources = () => {
 
   return (
     <DashboardLayout>
-      <h2>Pending Notes</h2>
+      <div className="page-container">
+        <h2 className="page-title">Pending Notes</h2>
 
-      {resources.map((r) => (
-        <div
-          key={r.id}
-          style={{
-            background: "white",
-            padding: "20px",
-            marginBottom: "15px",
-            borderRadius: "8px",
-          }}
-        >
-          <h3>{r.title}</h3>
-          <p><strong>Category:</strong> {r.category}</p>
-          <p>{r.description}</p>
+        {resources.map((r) => (
+          <div className="card" key={r.id}>
+            <h3>{r.title}</h3>
+            <p><strong>Category:</strong> {r.category}</p>
+            <p>{r.description}</p>
 
-          {r.filePath && (
-            <a
-              href={`${import.meta.env.VITE_API_URL}${r.filePath}`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              View Uploaded File
-            </a>
-          )}
+            {r.filePath && (
+              <a
+                className="link"
+                href={`${import.meta.env.VITE_API_URL}${r.filePath}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                View Uploaded File
+              </a>
+            )}
 
-          <div style={{ marginTop: "10px" }}>
-            <button onClick={() => handleApprove(r.id)}>
-              Approve
-            </button>
+            <div className="button-group">
+              <button
+                className="btn-success"
+                onClick={() => handleApprove(r.id)}
+              >
+                Approve
+              </button>
 
-            <button
-              onClick={() => handleReject(r.id)}
-              style={{ marginLeft: "10px", background: "red", color: "white" }}
-            >
-              Reject
-            </button>
+              <button
+                className="btn-danger"
+                onClick={() => handleReject(r.id)}
+              >
+                Reject
+              </button>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </DashboardLayout>
   );
 };

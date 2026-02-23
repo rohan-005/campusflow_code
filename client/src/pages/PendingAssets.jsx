@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getPendingAssets, approveAsset } from "../api/assetApi";
 import DashboardLayout from "../layout/DashboardLayout";
+import "./resources.css";
 
 const PendingAssets = () => {
   const [assets, setAssets] = useState([]);
@@ -21,18 +22,23 @@ const PendingAssets = () => {
 
   return (
     <DashboardLayout>
-      <h2>Pending Assets</h2>
+      <div className="page-container">
+        <h2 className="page-title">Pending Assets</h2>
 
-      {assets.map((asset) => (
-        <div key={asset.id}>
-          <h3>{asset.name}</h3>
-          <p>{asset.category}</p>
-          <button onClick={() => handleApprove(asset.id)}>
-            Approve
-          </button>
-          <hr />
-        </div>
-      ))}
+        {assets.map((asset) => (
+          <div className="card" key={asset.id}>
+            <h3>{asset.name}</h3>
+            <p>{asset.category}</p>
+
+            <button
+              className="btn-success"
+              onClick={() => handleApprove(asset.id)}
+            >
+              Approve
+            </button>
+          </div>
+        ))}
+      </div>
     </DashboardLayout>
   );
 };

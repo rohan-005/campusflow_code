@@ -1,0 +1,325 @@
+/* ========================= */
+/* COLOR PALETTE REFERENCE */
+/* ========================= */
+/* 
+  Use this file as a visual reference for the CampusFlow design system.
+  Uncomment the styles below to see color swatches.
+*/
+
+/* 
+  To use this color reference:
+  1. Import this file in your component
+  2. Add the color-swatch classes to your HTML
+  3. View in browser to see color palette
+
+  Example HTML:
+  <div className="color-group">
+    <div className="color-swatch primary-blue">Primary Blue</div>
+    <div className="color-swatch emerald">Emerald</div>
+  </div>
+*/
+
+.color-showcase {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 40px;
+  background: var(--bg-light);
+}
+
+.color-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.color-group-title {
+  font-weight: 700;
+  color: var(--text-primary);
+  font-size: 1.1rem;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--border-light);
+  margin-bottom: 8px;
+}
+
+.color-swatch {
+  height: 80px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: flex-end;
+  padding: 12px;
+  font-weight: 600;
+  color: white;
+  font-size: 0.9rem;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* PRIMARY COLORS */
+.color-swatch.primary-blue {
+  background: var(--primary-blue);
+}
+
+.color-swatch.primary-blue-dark {
+  background: var(--primary-blue-dark);
+}
+
+.color-swatch.primary-blue-light {
+  background: var(--primary-blue-light);
+}
+
+/* SUCCESS/EMERALD */
+.color-swatch.emerald {
+  background: var(--emerald);
+}
+
+.color-swatch.emerald-dark {
+  background: var(--emerald-dark);
+}
+
+.color-swatch.emerald-light {
+  background: var(--emerald-light);
+}
+
+/* STATUS COLORS */
+.color-swatch.status-approved {
+  background: var(--status-approved);
+  color: var(--status-approved-text);
+}
+
+.color-swatch.status-pending {
+  background: var(--status-pending);
+  color: var(--status-pending-text);
+}
+
+.color-swatch.status-rejected {
+  background: var(--status-rejected);
+  color: var(--status-rejected-text);
+}
+
+.color-swatch.status-info {
+  background: var(--status-info);
+  color: var(--status-info-text);
+}
+
+/* NEUTRAL COLORS */
+.color-swatch.bg-light {
+  background: var(--bg-light);
+  color: var(--text-primary);
+  border: 1px solid var(--border-light);
+}
+
+.color-swatch.bg-white {
+  background: var(--bg-white);
+  color: var(--text-primary);
+  border: 1px solid var(--border-light);
+}
+
+.color-swatch.border-light {
+  background: var(--border-light);
+  color: var(--text-primary);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.color-swatch.text-primary {
+  background: var(--text-primary);
+  color: white;
+}
+
+.color-swatch.text-secondary {
+  background: var(--text-secondary);
+  color: white;
+}
+
+.color-swatch.text-tertiary {
+  background: var(--text-tertiary);
+  color: white;
+}
+
+/* ADDITIONAL COLORS */
+.color-swatch.red-soft {
+  background: var(--red-soft);
+  color: var(--red-dark);
+  border: 1px solid var(--red-dark);
+}
+
+.color-swatch.red-dark {
+  background: var(--red-dark);
+  color: white;
+}
+
+.color-swatch.amber-soft {
+  background: var(--amber-soft);
+  color: var(--status-pending-text);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.color-swatch.blue-soft {
+  background: var(--blue-soft);
+  color: var(--status-info-text);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* COLOR DETAILS */
+.color-details {
+  background: var(--bg-white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.color-details h4 {
+  margin-top: 0;
+  color: var(--text-primary);
+}
+
+.color-hex {
+  font-family: monospace;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+}
+
+.color-usage {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.color-usage ul {
+  margin: 8px 0;
+  padding-left: 20px;
+}
+
+.color-usage li {
+  margin-bottom: 4px;
+}
+
+/* COMPONENT PREVIEW */
+.component-preview {
+  background: var(--bg-white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  margin-top: 20px;
+}
+
+.component-preview h4 {
+  margin-top: 0;
+  color: var(--text-primary);
+}
+
+.preview-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.preview-section {
+  margin-bottom: 20px;
+}
+
+.preview-section-title {
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* BADGE PREVIEWS */
+.badge-preview {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.preview-badge {
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.preview-badge.approved {
+  background: var(--status-approved);
+  color: var(--status-approved-text);
+}
+
+.preview-badge.pending {
+  background: var(--status-pending);
+  color: var(--status-pending-text);
+}
+
+.preview-badge.rejected {
+  background: var(--status-rejected);
+  color: var(--status-rejected-text);
+}
+
+.preview-badge.info {
+  background: var(--status-info);
+  color: var(--status-info-text);
+}
+
+/* SHADOW PREVIEWS */
+.shadow-preview {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 16px;
+}
+
+.shadow-box {
+  height: 100px;
+  border-radius: var(--radius-lg);
+  background: var(--bg-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.shadow-box.sm {
+  box-shadow: var(--shadow-sm);
+}
+
+.shadow-box.md {
+  box-shadow: var(--shadow-md);
+}
+
+.shadow-box.lg {
+  box-shadow: var(--shadow-lg);
+}
+
+.shadow-box.xl {
+  box-shadow: var(--shadow-xl);
+}
+
+/* ========================= */
+/* RESPONSIVE */
+/* ========================= */
+
+@media (max-width: 768px) {
+  .color-showcase {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+
+  .preview-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .preview-buttons button {
+    width: 100%;
+  }
+
+  .shadow-preview {
+    grid-template-columns: 1fr;
+  }
+}

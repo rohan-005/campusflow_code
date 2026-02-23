@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { uploadResource } from "../api/resourceApi";
 import DashboardLayout from "../layout/DashboardLayout";
+import "./resources.css";
 
 const UploadResource = () => {
   const [form, setForm] = useState({
@@ -10,9 +11,13 @@ const UploadResource = () => {
   });
 
   const [file, setFile] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setSuccess("");
 
     const formData = new FormData();
     formData.append("Title", form.title);
@@ -23,30 +28,59 @@ const UploadResource = () => {
 
     await uploadResource(formData);
 
-    alert("Resource submitted for approval");
+    setLoading(false);
+    setSuccess("Resource submitted for approval 🎉");
+
+    setForm({ title: "", description: "", category: "" });
+    setFile(null);
   };
 
   return (
     <DashboardLayout>
-      <h2>Upload Resource</h2>
+      <div className="page-container">
+        <h2 className="page-title">Upload Resource</h2>
 
-      <form onSubmit={handleSubmit}>
-        <input
-          placeholder="Title"
-          onChange={(e) => setForm({ ...form, title: e.target.value })}
-        />
-        <input
-          placeholder="Category"
-          onChange={(e) => setForm({ ...form, category: e.target.value })}
-        />
-        <textarea
-          placeholder="Description"
-          onChange={(e) => setForm({ ...form, description: e.target.value })}
-        />
-        <input type="file" onChange={(e) => setFile(e.target.files[0])} />
+        <form className="card-form" onSubmit={handleSubmit}>
+          <input
+            className="input"
+            placeholder="Title"
+            value={form.title}
+            onChange={(e) =>
+              setForm({ ...form, title: e.target.value })
+            }
+          />
 
-        <button type="submit">Submit</button>
-      </form>
+          <input
+            className="input"
+            placeholder="Category"
+            value={form.category}
+            onChange={(e) =>
+              setForm({ ...form, category: e.target.value })
+            }
+          />
+
+          <textarea
+            className="textarea"
+            placeholder="Description"
+            value={form.description}
+            onChange={(e) =>
+              setForm({ ...form, description: e.target.value })
+            }
+          />
+
+          <input
+            type="file"
+            className="file-input"
+            onChange={(e) => setFile(e.target.files[0])}
+          />
+
+          <button className="btn-primary" disabled={loading}>
+            {loading ? "Uploading..." : "Submit Resource"}
+          </button>
+
+          {success && <p className="success-message">{success}</p>}
+        </form>
+      </div>
     </DashboardLayout>
   );
 };

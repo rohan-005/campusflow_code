@@ -2,62 +2,34 @@ import { useEffect, useState } from "react";
 import { getApprovedAssets } from "../api/assetApi";
 import { createRequest } from "../api/requestApi";
 import DashboardLayout from "../layout/DashboardLayout";
+import "../styles/dashboard.css";
 
 const StudentDashboard = () => {
   const [assets, setAssets] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  const fetchAssets = async () => {
-    try {
-      setLoading(true);
-      const data = await getApprovedAssets(); // 🔥 only approved
-      setAssets(data);
-    } catch (err) {
-      console.error("Failed to fetch assets");
-    } finally {
-      setLoading(false);
-    }
-  };
 
   useEffect(() => {
-    fetchAssets();
+    const fetch = async () => {
+      const data = await getApprovedAssets();
+      setAssets(data);
+    };
+    fetch();
   }, []);
 
   const handleRequest = async (id) => {
-    try {
-      await createRequest({
-        assetId: id,
-        dueDate: new Date(Date.now() + 7 * 86400000),
-      });
-
-      alert("Request submitted successfully");
-      fetchAssets(); // refresh quantities
-    } catch (err) {
-      alert("Failed to submit request");
-    }
+    await createRequest({
+      assetId: id,
+      dueDate: new Date(Date.now() + 7 * 86400000),
+    });
+    alert("Request submitted");
   };
 
   return (
     <DashboardLayout>
-      <h2>Available Assets</h2>
+      <div className="dashboard-container">
+        <h2 className="dashboard-title">Available Assets</h2>
 
-      {loading && <p>Loading assets...</p>}
-
-      {!loading && assets.length === 0 && (
-        <p>No approved assets available.</p>
-      )}
-
-      {!loading &&
-        assets.map((asset) => (
-          <div
-            key={asset.id}
-            style={{
-              border: "1px solid #ddd",
-              padding: 15,
-              marginBottom: 10,
-              borderRadius: 5,
-            }}
-          >
+        {assets.map((asset) => (
+          <div key={asset.id} className="card">
             <h3>{asset.name}</h3>
             <p>Category: {asset.category}</p>
             <p>Location: {asset.location}</p>
@@ -66,14 +38,20 @@ const StudentDashboard = () => {
             </p>
 
             {asset.availableQuantity > 0 ? (
-              <button onClick={() => handleRequest(asset.id)}>
+              <button
+                className="btn btn-primary"
+                onClick={() => handleRequest(asset.id)}
+              >
                 Request
               </button>
             ) : (
-              <button disabled>Out of Stock</button>
+              <button className="btn btn-disabled" disabled>
+                Out of Stock
+              </button>
             )}
           </div>
         ))}
+      </div>
     </DashboardLayout>
   );
 };
