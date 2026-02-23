@@ -1,5 +1,6 @@
 ﻿using CampusFlow.Application.Interfaces.Repositories;
 using CampusFlow.Domain.Entities;
+using CampusFlow.Domain.Enums;
 using CampusFlow.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -27,6 +28,20 @@ public class AssetRepository : IAssetRepository
     public async Task<IEnumerable<Asset>> GetAllAsync()
     {
         return await _context.Assets.ToListAsync();
+    }
+
+    public async Task<IEnumerable<Asset>> GetApprovedAsync()
+    {
+        return await _context.Assets
+            .Where(a => a.Status == ResourceStatus.Approved)
+            .ToListAsync();
+    }
+
+    public async Task<IEnumerable<Asset>> GetPendingAsync()
+    {
+        return await _context.Assets
+            .Where(a => a.Status == ResourceStatus.Pending)
+            .ToListAsync();
     }
 
     public async Task SaveChangesAsync()

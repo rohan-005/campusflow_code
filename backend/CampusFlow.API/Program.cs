@@ -32,6 +32,7 @@ builder.Services.AddScoped<IResourceRepository, ResourceRepository>();
 builder.Services.AddScoped<IAssetRepository, AssetRepository>();
 builder.Services.AddScoped<IAssetRequestRepository, AssetRequestRepository>();
 builder.Services.AddScoped<AssetService>();
+builder.Services.AddScoped<AssetRequestService>();
 
 builder.Services.AddControllers();
 
@@ -98,29 +99,29 @@ app.MapControllers();
 // --------------------------------------------------
 // DEFAULT ADMIN SEEDING (BCrypt)
 // --------------------------------------------------
-//using (var scope = app.Services.CreateScope())
-//{
-//    var context = scope.ServiceProvider.GetRequiredService<CampusFlowDbContext>();
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<CampusFlowDbContext>();
 
-//    // Apply migrations automatically
-//    context.Database.Migrate();
+    // Apply migrations automatically
+    context.Database.Migrate();
 
-//    if (!context.Users.Any(u => u.Email == "admin@campusflow.com"))
-//    {
-//        var admin = new User
-//        {
-//            Name = "System Admin",
-//            StudentId = "ADMIN001",
-//            Email = "admin@campusflow.com",
-//            Role = UserRole.Admin,
-//            CreatedAt = DateTime.UtcNow,
-//            IsActive = true,
-//            PasswordHash = BCrypt.Net.BCrypt.HashPassword("Admin@123")
-//        };
+    if (!context.Users.Any(u => u.Email == "admin@campusflow.com"))
+    {
+        var admin = new User
+        {
+            Name = "System Admin",
+            StudentId = "ADMIN001",
+            Email = "admin@campusflow.com",
+            Role = UserRole.Admin,
+            CreatedAt = DateTime.UtcNow,
+            IsActive = true,
+            PasswordHash = BCrypt.Net.BCrypt.HashPassword("Admin@123")
+        };
 
-//        context.Users.Add(admin);
-//        context.SaveChanges();
-//    }
-//}
+        context.Users.Add(admin);
+        context.SaveChanges();
+    }
+}
 
 app.Run();

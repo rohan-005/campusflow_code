@@ -1,4 +1,6 @@
-﻿namespace CampusFlow.Domain.Entities;
+﻿using CampusFlow.Domain.Enums;
+
+namespace CampusFlow.Domain.Entities;
 
 public class AssetRequest
 {
@@ -10,7 +12,7 @@ public class AssetRequest
 
     public DateTime RequestDate { get; set; } = DateTime.UtcNow;
 
-    public string ApprovalStatus { get; set; } = "Pending";
+    public ResourceStatus ApprovalStatus { get; set; } = ResourceStatus.Pending;
 
     public DateTime? IssueDate { get; set; }
 

@@ -1,4 +1,5 @@
 ﻿using CampusFlow.Domain.Entities;
+using CampusFlow.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace CampusFlow.Infrastructure.Data;
@@ -10,7 +11,6 @@ public class CampusFlowDbContext : DbContext
 
     public DbSet<User> Users { get; set; }
     public DbSet<Resource> Resources { get; set; }
-
     public DbSet<Asset> Assets { get; set; }
     public DbSet<AssetRequest> AssetRequests { get; set; }
 
@@ -32,6 +32,14 @@ public class CampusFlowDbContext : DbContext
 
         modelBuilder.Entity<Resource>()
             .Property(r => r.Status)
+            .HasConversion<string>();
+
+        modelBuilder.Entity<AssetRequest>()
+            .Property(r => r.ApprovalStatus)
+            .HasConversion<string>();
+
+        modelBuilder.Entity<Asset>()
+            .Property(a => a.Status)
             .HasConversion<string>();
     }
 }

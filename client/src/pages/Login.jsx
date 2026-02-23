@@ -17,26 +17,23 @@ const Login = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
+  e.preventDefault();
+  setLoading(true);
 
-    try {
-      const response = await login(form);
+  try {
+    const user = await login(form);
 
-      // 👇 Redirect based on role
-      if (response.role === "Admin") {
-        navigate("/admin");
-      } else {
-        navigate("/student");
-      }
-
-    } catch (err) {
-      console.log("Login error caught");
-    } finally {
-      setLoading(false);
+    if (user.role === "Admin") {
+      navigate("/admin");
+    } else {
+      navigate("/student");
     }
-  };
-
+  } catch (err) {
+    console.log("Login error caught");
+  } finally {
+    setLoading(false);
+  }
+};
   return (
     <div className="auth-wrapper">
       <div className="auth-card">

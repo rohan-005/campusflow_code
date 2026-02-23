@@ -1,4 +1,6 @@
-﻿namespace CampusFlow.Domain.Entities;
+﻿using CampusFlow.Domain.Enums;
+
+namespace CampusFlow.Domain.Entities;
 
 public class Asset
 {
@@ -13,6 +15,10 @@ public class Asset
     public int TotalQuantity { get; set; }
 
     public int AvailableQuantity { get; set; }
+
+    public ResourceStatus Status { get; set; } = ResourceStatus.Pending;
+
+    public int CreatedBy { get; set; }
 
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 }

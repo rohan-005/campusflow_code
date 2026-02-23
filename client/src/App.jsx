@@ -7,6 +7,8 @@ import Landing from "./pages/Landing";
 
 import AdminDashboard from "./pages/AdminDashboard";
 import StudentDashboard from "./pages/StudentDashboard";
+import CreateAsset from "./pages/CreateAsset";
+import PendingAssets from "./pages/PendingAssets";
 
 import ProtectedRoute from "./routes/ProtectedRoute";
 
@@ -16,12 +18,10 @@ function App() {
       <BrowserRouter>
         <Routes>
 
-          {/* Public Routes */}
           <Route path="/" element={<Landing />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
 
-          {/* Admin Route */}
           <Route
             path="/admin"
             element={
@@ -31,12 +31,29 @@ function App() {
             }
           />
 
-          {/* Student Route */}
           <Route
             path="/student"
             element={
               <ProtectedRoute role="Student">
                 <StudentDashboard />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/create-asset"
+            element={
+              <ProtectedRoute role="Student">
+                <CreateAsset />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/pending-assets"
+            element={
+              <ProtectedRoute role="Admin">
+                <PendingAssets />
               </ProtectedRoute>
             }
           />

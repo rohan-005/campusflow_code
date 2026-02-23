@@ -2,6 +2,7 @@
 using CampusFlow.Infrastructure.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace CampusFlow.API.Controllers;
 
@@ -17,6 +18,19 @@ public class AssetsController : ControllerBase
         _assetService = assetService;
     }
 
+    // 🔥 Student uploads asset
+    [Authorize(Roles = "Student")]
+    [HttpPost("student")]
+    public async Task<IActionResult> CreateByStudent(CreateAssetDto dto)
+    {
+        var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
+
+        await _assetService.CreateByStudentAsync(userId, dto);
+
+        return Ok("Asset submitted for approval");
+    }
+
+    // 🔥 Admin creates approved asset
     [Authorize(Roles = "Admin")]
     [HttpPost]
     public async Task<IActionResult> Create(CreateAssetDto dto)
@@ -25,10 +39,29 @@ public class AssetsController : ControllerBase
         return Ok("Asset created successfully");
     }
 
-    [HttpGet]
-    public async Task<IActionResult> GetAll()
+    // 🔥 Students see only approved assets
+    [HttpGet("approved")]
+    public async Task<IActionResult> GetApproved()
     {
-        var assets = await _assetService.GetAllAsync();
+        var assets = await _assetService.GetApprovedAsync();
         return Ok(assets);
+    }
+
+    // 🔥 Admin sees pending assets
+    [Authorize(Roles = "Admin")]
+    [HttpGet("pending")]
+    public async Task<IActionResult> GetPending()
+    {
+        var assets = await _assetService.GetPendingAsync();
+        return Ok(assets);
+    }
+
+    // 🔥 Admin approves asset
+    [Authorize(Roles = "Admin")]
+    [HttpPut("{id}/approve")]
+    public async Task<IActionResult> Approve(int id)
+    {
+        await _assetService.ApproveAsync(id);
+        return Ok("Asset approved successfully");
     }
 }
