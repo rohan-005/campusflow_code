@@ -8,32 +8,33 @@ const Login = () => {
   const [form, setForm] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
 
-  const { login, error, setError } = useContext(AuthContext);
+  const { login, error } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
-    setError(null);
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  setLoading(true);
+    e.preventDefault();
+    setLoading(true);
 
-  try {
-    const user = await login(form);
+    try {
+      const user = await login(form);
 
-    if (user.role === "Admin") {
-      navigate("/admin");
-    } else {
-      navigate("/student");
+      if (user.role === "Admin") {
+        navigate("/admin");
+      } else {
+        navigate("/student");
+      }
+
+    } catch (err) {
+      console.log("Login error caught");
+    } finally {
+      setLoading(false);
     }
-  } catch (err) {
-    console.log("Login error caught");
-  } finally {
-    setLoading(false);
-  }
-};
+  };
+
   return (
     <div className="auth-wrapper">
       <div className="auth-card">

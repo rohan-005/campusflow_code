@@ -1,7 +1,9 @@
 ﻿using CampusFlow.Application.DTOs.Auth;
 using CampusFlow.Application.Interfaces.Services;
+using CampusFlow.Infrastructure.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CampusFlow.API.Controllers;
 
@@ -10,12 +12,20 @@ namespace CampusFlow.API.Controllers;
 public class AuthController : ControllerBase
 {
     private readonly IUserService _userService;
+    private readonly CampusFlowDbContext _context;
 
-    public AuthController(IUserService userService)
+    // ✅ Single constructor (correct DI)
+    public AuthController(
+        IUserService userService,
+        CampusFlowDbContext context)
     {
         _userService = userService;
+        _context = context;
     }
 
+    // -----------------------------------
+    // REGISTER
+    // -----------------------------------
     [HttpPost("register")]
     public async Task<IActionResult> Register(RegisterDto dto)
     {
@@ -30,6 +40,9 @@ public class AuthController : ControllerBase
         }
     }
 
+    // -----------------------------------
+    // LOGIN
+    // -----------------------------------
     [HttpPost("login")]
     public async Task<IActionResult> Login(LoginDto dto)
     {
@@ -44,8 +57,34 @@ public class AuthController : ControllerBase
         }
     }
 
-    [HttpGet("me")]
+    // -----------------------------------
+    // GET ALL USERS (Admin Only)
+    // -----------------------------------
+    [Authorize(Roles = "Admin")]
+    [HttpGet("all-users")]
+    public async Task<IActionResult> GetAllUsers()
+    {
+        var users = await _context.Users
+            .Select(u => new
+            {
+                u.Id,
+                u.Name,
+                u.Email,
+                u.StudentId,
+                Role = u.Role.ToString(),
+                u.CreatedAt,
+                u.IsActive
+            })
+            .ToListAsync();
+
+        return Ok(users);
+    }
+
+    // -----------------------------------
+    // CURRENT USER INFO
+    // -----------------------------------
     [Authorize]
+    [HttpGet("me")]
     public IActionResult GetCurrentUser()
     {
         var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;

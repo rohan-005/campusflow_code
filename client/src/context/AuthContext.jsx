@@ -1,4 +1,3 @@
-/* eslint-disable react-refresh/only-export-components */
 import { createContext, useState, useEffect } from "react";
 import { loginUser } from "../api/authApi";
 
@@ -6,52 +5,67 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const login = async (data) => {
     try {
       setError(null);
 
-      const res = await loginUser(data);
+      const response = await loginUser(data);
+      const { token, email, role } = response;
 
-      const { token, email, role } = res.data;
-
-      // store everything
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify({ email, role }));
 
-      const userData = { email, role };
-      setUser(userData);
+      setUser({ email, role });
 
-      return userData; // 🔥 return actual user
+      return { email, role };   // 🔥 important for redirect
     } catch (err) {
-      const errorMessage =
+      const message =
         err.response?.data?.message ||
-        "Login failed. Please check your credentials.";
+        "Invalid email or password";
 
-      setError(errorMessage);
+      setError(message);
+      setUser(null);
       throw err;
     }
   };
 
   const logout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
+    localStorage.clear();
     setUser(null);
+    setError(null);
   };
 
-  // restore session on refresh
+  // Restore session on refresh
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
+    try {
+      const token = localStorage.getItem("token");
+      const storedUser = localStorage.getItem("user");
 
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
+      if (token && storedUser) {
+        setUser(JSON.parse(storedUser));
+      }
+    } catch (err) {
+      localStorage.clear();
+      setUser(null);
+    } finally {
+      setLoading(false);
     }
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, error, setError }}>
-      {children}
+    <AuthContext.Provider
+      value={{
+        user,
+        login,
+        logout,
+        loading,
+        error,
+      }}
+    >
+      {!loading && children}
     </AuthContext.Provider>
   );
 };

@@ -27,6 +27,7 @@ builder.Services.AddScoped<IJwtService, JwtService>();
 
 // Resource Module
 builder.Services.AddScoped<IResourceRepository, ResourceRepository>();
+builder.Services.AddScoped<IResourceService, ResourceService>();
 
 // Asset Module
 builder.Services.AddScoped<IAssetRepository, AssetRepository>();
@@ -97,13 +98,12 @@ app.UseAuthorization();
 app.MapControllers();
 
 // --------------------------------------------------
-// DEFAULT ADMIN SEEDING (BCrypt)
+// AUTO MIGRATION + ADMIN SEED
 // --------------------------------------------------
 using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<CampusFlowDbContext>();
 
-    // Apply migrations automatically
     context.Database.Migrate();
 
     if (!context.Users.Any(u => u.Email == "admin@campusflow.com"))

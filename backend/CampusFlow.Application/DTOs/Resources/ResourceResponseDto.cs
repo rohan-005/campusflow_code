@@ -1,6 +1,8 @@
-﻿public class ResourceResponseDto
+﻿namespace CampusFlow.Application.DTOs;
+
+public class ResourceResponseDto
 {
-    public Guid Id { get; set; }
+    public int Id { get; set; }
     public string Title { get; set; } = null!;
     public string Description { get; set; } = null!;
     public string Category { get; set; } = null!;

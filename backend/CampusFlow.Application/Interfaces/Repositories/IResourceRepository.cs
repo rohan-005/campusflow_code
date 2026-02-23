@@ -7,5 +7,6 @@ public interface IResourceRepository
     Task AddAsync(Resource resource);
     Task<Resource?> GetByIdAsync(int id);
     Task<IEnumerable<Resource>> GetPendingAsync();
+    Task<IEnumerable<Resource>> GetApprovedAsync();
     Task SaveChangesAsync();
 }

@@ -1,5 +1,6 @@
 ﻿using CampusFlow.Application.Interfaces.Repositories;
 using CampusFlow.Domain.Entities;
+using CampusFlow.Domain.Enums;
 using CampusFlow.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -27,7 +28,14 @@ public class ResourceRepository : IResourceRepository
     public async Task<IEnumerable<Resource>> GetPendingAsync()
     {
         return await _context.Resources
-            .Where(r => r.Status == Domain.Enums.ResourceStatus.Pending)
+            .Where(r => r.Status == ResourceStatus.Pending)
+            .ToListAsync();
+    }
+
+    public async Task<IEnumerable<Resource>> GetApprovedAsync()
+    {
+        return await _context.Resources
+            .Where(r => r.Status == ResourceStatus.Approved)
             .ToListAsync();
     }
 
