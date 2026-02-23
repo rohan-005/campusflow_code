@@ -31,6 +31,12 @@ public class AssetRequestRepository : IAssetRequestRepository
             .Where(r => r.ApprovalStatus == ResourceStatus.Pending)
             .ToListAsync();
     }
+    public async Task<IEnumerable<AssetRequest>> GetByUserIdAsync(int userId)
+    {
+        return await _context.AssetRequests
+            .Where(r => r.UserId == userId)
+            .ToListAsync();
+    }
 
     public async Task SaveChangesAsync()
     {

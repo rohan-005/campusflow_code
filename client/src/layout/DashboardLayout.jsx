@@ -2,7 +2,7 @@ import Navbar from "../components/Navbar";
 
 const DashboardLayout = ({ children }) => {
   return (
-    <div style={{ minHeight: "100vh", background: "#f1f5f9" }}>
+    <div style={{ minHeight: "100vh" }}>
       <Navbar />
 
       <div

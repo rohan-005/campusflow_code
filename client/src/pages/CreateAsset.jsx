@@ -2,6 +2,7 @@ import { useState } from "react";
 import { createStudentAsset } from "../api/assetApi";
 import DashboardLayout from "../layout/DashboardLayout";
 import "./resources.css";
+import showToast from "../utils/toast";
 
 const CreateAsset = () => {
   const [form, setForm] = useState({
@@ -18,7 +19,7 @@ const CreateAsset = () => {
     e.preventDefault();
 
     if (!form.name || !form.category || !form.location) {
-      alert("Please fill all fields");
+      showToast("Please fill all fields", "error");
       return;
     }
 
@@ -32,6 +33,7 @@ const CreateAsset = () => {
 
     setLoading(false);
     setSuccess("Asset submitted for approval 🎉");
+    showToast("Asset submitted for approval 🎉", "success");
 
     setForm({
       name: "",

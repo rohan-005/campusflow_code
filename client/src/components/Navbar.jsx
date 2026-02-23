@@ -24,6 +24,7 @@ const Navbar = () => {
             <Link to="/student">Dashboard</Link>
             <Link to="/upload-resource">Upload Notes</Link>
             <Link to="/approved-resources">Available Notes</Link>
+            <Link to="/my-requests">My Requests</Link>
           </>
         )}
 
@@ -32,6 +33,7 @@ const Navbar = () => {
             <Link to="/admin">Dashboard</Link>
             <Link to="/pending-resources">Pending Notes</Link>
             <Link to="/pending-assets">Pending Assets</Link>
+            <Link to="/pending-requests">Pending Requests</Link>
             <Link to="/all-users">Users</Link>
           </>
         )}

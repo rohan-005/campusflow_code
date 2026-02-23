@@ -12,13 +12,17 @@ import PendingAssets from "./pages/PendingAssets";
 import UploadResource from "./pages/UploadResource";
 import PendingResources from "./pages/PendingResources";
 import ApprovedResources from "./pages/ApprovedResources";
+import AllRequests from "./pages/AllRequests"
 
 import ProtectedRoute from "./routes/ProtectedRoute";
 import AllUsers from "./pages/AllUsers";
+import Toast from "./components/Toast";
+import MyRequests from "./pages/MyRequests";
 
 function App() {
   return (
     <AuthProvider>
+      <Toast />
       <BrowserRouter>
         <Routes>
           {/* Public Routes */}
@@ -53,6 +57,14 @@ function App() {
               </ProtectedRoute>
             }
           />
+           <Route
+            path="/pending-requests"
+            element={
+              <ProtectedRoute role="Admin">
+                <AllRequests/>
+              </ProtectedRoute>
+            }
+          />
 
           {/* Student Routes */}
           <Route
@@ -78,6 +90,14 @@ function App() {
             element={
               <ProtectedRoute role="Student">
                 <UploadResource />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/my-requests"
+            element={
+              <ProtectedRoute role="Student">
+                <MyRequests />
               </ProtectedRoute>
             }
           />

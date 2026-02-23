@@ -1,7 +1,7 @@
 import axiosInstance from "./axiosInstance";
 
 export const getAllAssets = async () => {
-  const res = await axiosInstance.get("/assets");
+  const res = await axiosInstance.get("/assets/approved");
   return res.data;
 };
 

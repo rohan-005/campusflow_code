@@ -1,0 +1,43 @@
+.cf-toast-container {
+  position: fixed;
+  right: 20px;
+  top: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 9999;
+}
+
+.cf-toast {
+  background: linear-gradient(90deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+  color: var(--text-primary);
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-lg);
+  transform-origin: right top;
+  animation: cf-toast-in 260ms var(--transition-fast) ease-out;
+}
+
+.cf-toast-success { border-left: 4px solid var(--emerald); }
+.cf-toast-error { border-left: 4px solid var(--red-dark); }
+.cf-toast-info { border-left: 4px solid var(--primary-blue); }
+
+@keyframes cf-toast-in {
+  from { opacity: 0; transform: translateY(-6px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes cf-toast-out {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-6px); }
+}
+
+/* Smooth entrance for cards and upload zones */
+.card, .upload-zone, .upload-info-card, .file-item, .upload-form-main {
+  transition: transform var(--transition-base), box-shadow var(--transition-base), background var(--transition-base);
+}
+
+.fade-in {
+  animation: cf-toast-in 300ms var(--transition-fast) both;
+}

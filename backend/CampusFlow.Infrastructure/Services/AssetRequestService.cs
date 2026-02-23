@@ -60,4 +60,8 @@ public class AssetRequestService
         await _requestRepo.SaveChangesAsync();
         await _assetRepo.SaveChangesAsync();
     }
+    public async Task<IEnumerable<AssetRequest>> GetByUserIdAsync(int userId)
+    {
+        return await _requestRepo.GetByUserIdAsync(userId);
+    }
 }

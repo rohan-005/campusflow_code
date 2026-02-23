@@ -43,7 +43,7 @@ const PendingResources = () => {
             {r.filePath && (
               <a
                 className="link"
-                href={`${import.meta.env.VITE_API_URL}${r.filePath}`}
+                href={`${import.meta.env.VITE_FILE_BASE}${r.filePath}`}
                 target="_blank"
                 rel="noreferrer"
               >

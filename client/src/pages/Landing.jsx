@@ -1,60 +1,58 @@
 import { Link } from "react-router-dom";
-import { 
-  FiMonitor, 
-  FiBookOpen, 
-  FiCheckCircle, 
-  FiShield,
-  FiArrowRight
+import {
+  FiMonitor,
+  FiBookOpen,
+  FiCheckCircle,
+  FiShield
 } from "react-icons/fi";
 import "../styles/landing.css";
 
 const Landing = () => {
   const features = [
     {
-      icon: <FiMonitor className="feature-icon" />,
+      icon: <FiMonitor />,
       title: "Asset Tracking",
-      description: "Real-time tracking of labs, classrooms, and equipment with automated check-in/out"
+      description:
+        "Real-time tracking of labs, classrooms, and equipment with automated check-in/out"
     },
     {
-      icon: <FiBookOpen className="feature-icon" />,
+      icon: <FiBookOpen />,
       title: "Digital Repository",
-      description: "Centralized storage for notes, study materials with version control and moderation"
+      description:
+        "Centralized storage for notes and study materials with moderation"
     },
     {
-      icon: <FiCheckCircle className="feature-icon" />,
+      icon: <FiCheckCircle />,
       title: "Approval Workflows",
-      description: "Multi-step verification system for all resource requests and content uploads"
+      description:
+        "Multi-step verification system for resource requests and uploads"
     },
     {
-      icon: <FiShield className="feature-icon" />,
+      icon: <FiShield />,
       title: "Access Control",
-      description: "Role-based permissions for students, faculty, and administrative staff"
+      description:
+        "Role-based permissions for students and administrators"
     }
   ];
 
   return (
     <div className="landing-container">
-      {/* Header with logo */}
       <header className="landing-header">
         <div className="logo-container">
-          <div className="logo-icon">
-            <span className="logo-dot"></span>
-          </div>
+          <div className="logo-icon">CF</div>
           <span className="logo-text">CampusFlow</span>
         </div>
       </header>
 
-      {/* Main content */}
       <main className="landing-main">
-        {/* Hero section */}
         <div className="hero-section">
           <h1 className="hero-title">
             Centralized Campus Resource Management
           </h1>
 
           <p className="hero-subtitle">
-            A unified platform for managing physical assets, digital resources, 
-            and approval workflows across your institution.
+            A unified platform for managing assets, digital resources,
+            and structured approval workflows.
           </p>
 
           <div className="hero-buttons">
@@ -67,26 +65,21 @@ const Landing = () => {
           </div>
         </div>
 
-        {/* Features section */}
-        <div className="features-section">
-          <div className="features-grid">
-            {features.map((feature, index) => (
-              <div key={index} className="feature-card">
-                <div className="feature-icon-wrapper">
-                  {feature.icon}
-                </div>
-                <h3>{feature.title}</h3>
-                <p>{feature.description}</p>
-                <div className="feature-hover-effect"></div>
+        <div className="features-grid">
+          {features.map((feature, index) => (
+            <div key={index} className="feature-card">
+              <div className="feature-icon-wrapper">
+                {feature.icon}
               </div>
-            ))}
-          </div>
+              <h3>{feature.title}</h3>
+              <p>{feature.description}</p>
+            </div>
+          ))}
         </div>
       </main>
 
-      {/* Simple footer */}
       <footer className="landing-footer">
-        <p>© 2024 CampusFlow. Institutional access only.</p>
+        © 2026 CampusFlow. Institutional Access Only.
       </footer>
     </div>
   );

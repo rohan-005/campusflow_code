@@ -44,4 +44,18 @@ public class AssetRequestsController : ControllerBase
         await _service.ApproveAsync(id);
         return Ok("Approved successfully");
     }
+    [Authorize(Roles = "Student")]
+    [HttpGet("my")]
+    public async Task<IActionResult> GetMyRequests()
+    {
+        var userId = int.Parse(
+            User.FindFirst(ClaimTypes.NameIdentifier)!.Value
+        );
+
+        var requests = await _service.GetByUserIdAsync(userId);
+
+        return Ok(requests);
+    }
+
+
 }

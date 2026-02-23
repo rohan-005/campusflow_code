@@ -811,9 +811,6 @@ tbody tr:hover {
     width: 100%;
   }
 }
-  text-align: left;
-}
-
 td {
   padding: 12px;
   border-bottom: 1px solid #e5e7eb;

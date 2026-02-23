@@ -3,6 +3,7 @@ import { getApprovedAssets } from "../api/assetApi";
 import { createRequest } from "../api/requestApi";
 import DashboardLayout from "../layout/DashboardLayout";
 import "../styles/dashboard.css";
+import showToast from "../utils/toast";
 
 const StudentDashboard = () => {
   const [assets, setAssets] = useState([]);
@@ -20,7 +21,7 @@ const StudentDashboard = () => {
       assetId: id,
       dueDate: new Date(Date.now() + 7 * 86400000),
     });
-    alert("Request submitted");
+    showToast("Request submitted", "success");
   };
 
   return (
