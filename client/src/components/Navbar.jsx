@@ -32,8 +32,8 @@ const Navbar = () => {
           <>
             <Link to="/admin">Dashboard</Link>
             <Link to="/pending-resources">Pending Notes</Link>
-            <Link to="/pending-assets">Pending Assets</Link>
             <Link to="/pending-requests">Pending Requests</Link>
+            <Link to="/requests">All Requests</Link>
             <Link to="/all-users">Users</Link>
           </>
         )}

@@ -64,4 +64,20 @@ public class AssetRequestService
     {
         return await _requestRepo.GetByUserIdAsync(userId);
     }
+    public async Task RejectAsync(int requestId)
+    {
+        var request = await _requestRepo.GetByIdAsync(requestId);
+
+        if (request == null)
+            throw new Exception("Request not found");
+
+        request.ApprovalStatus = ResourceStatus.Rejected;
+
+        await _requestRepo.SaveChangesAsync();
+    }
+
+    public async Task<IEnumerable<AssetRequest>> GetAllAsync()
+    {
+        return await _requestRepo.GetAllAsync();
+    }
 }

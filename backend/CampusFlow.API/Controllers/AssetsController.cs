@@ -18,19 +18,21 @@ public class AssetsController : ControllerBase
         _assetService = assetService;
     }
 
-    // 🔥 Student uploads asset
+    // 🔥 Student uploads asset (Pending)
     [Authorize(Roles = "Student")]
     [HttpPost("student")]
     public async Task<IActionResult> CreateByStudent(CreateAssetDto dto)
     {
-        var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
+        var userId = int.Parse(
+            User.FindFirst(ClaimTypes.NameIdentifier)!.Value
+        );
 
         await _assetService.CreateByStudentAsync(userId, dto);
 
         return Ok("Asset submitted for approval");
     }
 
-    // 🔥 Admin creates approved asset
+    // 🔥 Admin creates directly approved asset
     [Authorize(Roles = "Admin")]
     [HttpPost]
     public async Task<IActionResult> Create(CreateAssetDto dto)
@@ -63,5 +65,14 @@ public class AssetsController : ControllerBase
     {
         await _assetService.ApproveAsync(id);
         return Ok("Asset approved successfully");
+    }
+
+    // 🔥 Admin rejects asset
+    [Authorize(Roles = "Admin")]
+    [HttpPut("{id}/reject")]
+    public async Task<IActionResult> Reject(int id)
+    {
+        await _assetService.RejectAsync(id);
+        return Ok("Asset rejected successfully");
     }
 }

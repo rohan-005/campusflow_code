@@ -70,4 +70,16 @@ public class AssetService
 
         await _assetRepository.SaveChangesAsync();
     }
+
+    public async Task RejectAsync(int id)
+    {
+        var asset = await _assetRepository.GetByIdAsync(id);
+
+        if (asset == null)
+            throw new Exception("Asset not found");
+
+        asset.Status = ResourceStatus.Rejected;
+
+        await _assetRepository.SaveChangesAsync();
+    }
 }

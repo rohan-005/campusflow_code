@@ -56,6 +56,21 @@ public class AssetRequestsController : ControllerBase
 
         return Ok(requests);
     }
+    [Authorize(Roles = "Admin")]
+    [HttpPut("{id}/reject")]
+    public async Task<IActionResult> Reject(int id)
+    {
+        await _service.RejectAsync(id);
+        return Ok("Rejected successfully");
+    }
+
+    [Authorize(Roles = "Admin")]
+    [HttpGet("all")]
+    public async Task<IActionResult> GetAll()
+    {
+        var requests = await _service.GetAllAsync();
+        return Ok(requests);
+    }
 
 
 }

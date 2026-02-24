@@ -37,6 +37,12 @@ public class AssetRequestRepository : IAssetRequestRepository
             .Where(r => r.UserId == userId)
             .ToListAsync();
     }
+    public async Task<IEnumerable<AssetRequest>> GetAllAsync()
+    {
+        return await _context.AssetRequests
+            .OrderByDescending(r => r.Id)
+            .ToListAsync();
+    }
 
     public async Task SaveChangesAsync()
     {

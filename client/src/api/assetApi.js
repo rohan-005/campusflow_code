@@ -28,3 +28,7 @@ export const approveAsset = async (id) => {
   const res = await axiosInstance.put(`/assets/${id}/approve`);
   return res.data;
 };
+export const rejectAsset = async (id) => {
+  const res = await axiosInstance.put(`/assets/${id}/reject`);
+  return res.data;
+};

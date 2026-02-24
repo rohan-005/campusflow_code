@@ -8,5 +8,6 @@ public interface IAssetRequestRepository
     Task<AssetRequest?> GetByIdAsync(int id);
     Task<IEnumerable<AssetRequest>> GetPendingAsync();
     Task<IEnumerable<AssetRequest>> GetByUserIdAsync(int userId);
+    Task<IEnumerable<AssetRequest>> GetAllAsync();
     Task SaveChangesAsync();
 }

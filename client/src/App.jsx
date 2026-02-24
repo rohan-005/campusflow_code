@@ -8,7 +8,7 @@ import Landing from "./pages/Landing";
 import AdminDashboard from "./pages/AdminDashboard";
 import StudentDashboard from "./pages/StudentDashboard";
 import CreateAsset from "./pages/CreateAsset";
-import PendingAssets from "./pages/PendingAssets";
+// import PendingAssets from "./pages/PendingAssets";
 import UploadResource from "./pages/UploadResource";
 import PendingResources from "./pages/PendingResources";
 import ApprovedResources from "./pages/ApprovedResources";
@@ -18,6 +18,7 @@ import ProtectedRoute from "./routes/ProtectedRoute";
 import AllUsers from "./pages/AllUsers";
 import Toast from "./components/Toast";
 import MyRequests from "./pages/MyRequests";
+import AllRequestsAdmin from "./pages/Allrequestsadmin";
 
 function App() {
   return (
@@ -41,10 +42,10 @@ function App() {
           />
 
           <Route
-            path="/pending-assets"
+            path="/requests"
             element={
               <ProtectedRoute role="Admin">
-                <PendingAssets />
+                <AllRequestsAdmin />
               </ProtectedRoute>
             }
           />
